@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,13 +9,15 @@ namespace Projects
 {
     internal class Project4
     {
-        static string[] choice = { "rock", "paper", "scissors", "rock", "paper", "scissors" };
-
         static void Main(string[] args)
         {
-            string compChoice = computerChoice();
-            string playerChoice;
+            Random random = new Random();
+            string[] choice = { "rock", "paper", "scissors" };
+
+            string playerChoice, compChoice;
+
             int playerScore = 0, computerScore = 0;
+
             bool loop = true;
 
             while (loop)
@@ -38,6 +41,7 @@ namespace Projects
                     return;
                 }
 
+                compChoice = choice[random.Next(0, choice.Length)];
                 Console.WriteLine("Computer's choice: " + compChoice);
 
                 if (String.Compare(playerChoice, compChoice) == 0)
@@ -73,18 +77,21 @@ namespace Projects
                 }
             }
         }
+        static void displayScore(int playerScore, int computerScore)
+        {
+            Console.WriteLine("Your score: " + playerScore);
+            Console.WriteLine("Computer's score: " + computerScore);
+            Console.WriteLine();
+        }
 
+        /*
         static string computerChoice()
         {
             Random random = new Random();
             string compChoice = choice[random.Next(0, choice.Length - 1)];
             return compChoice;
         }
+        */
 
-        static void displayScore(int playerScore, int computerScore)
-        {
-            Console.WriteLine("Your score: " + playerScore);
-            Console.WriteLine("Computer's score: " + computerScore);
-        }
     }
 }
